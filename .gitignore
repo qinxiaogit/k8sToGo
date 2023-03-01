@@ -3,5 +3,5 @@
 /vendor/
 /stream/vendor
 /stream/go.sum
-.idea2
-.idea
+.idea2/
+.idea/
