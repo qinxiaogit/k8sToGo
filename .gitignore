@@ -1,1 +1,7 @@
-/helloworld/g1.5.0.darwin-amd64.tar.gz
+/helloworld/vendor
+/helloworld/go.sum
+/vendor/
+/stream/vendor
+/stream/go.sum
+.idea2
+.idea
