@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+// 定义包名
+package proto;
+
+option go_package = "./;proto";
+//option go_package = "./;proto";
+
+
+message StreamRequest{
+    //流请求参数
+    string question = 1;
+}
+
+message StreamResponse{
+    string answer = 1;
+}
+
+//服务方法
+service Stream{
+    rpc Conversations(stream StreamRequest) returns (stream StreamResponse){};
+}

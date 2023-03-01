@@ -5,3 +5,5 @@
 /stream/go.sum
 .idea2/
 .idea/
+/both/vendor
+/both/go.sum
