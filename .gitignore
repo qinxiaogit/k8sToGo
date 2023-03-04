@@ -7,3 +7,4 @@
 .idea/
 /both/vendor
 /both/go.sum
+/both/.idea
