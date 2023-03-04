@@ -8,3 +8,7 @@
 /both/vendor
 /both/go.sum
 /both/.idea
+
+/deadlines/vendor
+/deadlines/go.sum
+/deadlines/.idea
