@@ -1,10 +1,15 @@
 package main
 
 import (
+	"context"
+	pb "github.com/qinxiaogit/k8sToGo/deadlines/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"log"
 	"net"
-	pb "github.com/qinxiaogit/k8sToGo/deadlines/proto"
+	"runtime"
+	"time"
 )
 
 // DeadlinesService 定义我们的服务
@@ -35,4 +40,29 @@ func main() {
 	}
 }
 
-func (s *DeadlinesService)Route(ctx context.Context, req *pb.Dea)
+/**
+ * grpc 方法
+ */
+func (s *DeadlinesService) Route(ctx context.Context, req *pb.DeadlinesRequest) (*pb.DeadlinesResponse, error) {
+	data := make(chan *pb.DeadlinesResponse, 1)
+
+	go handle(ctx,req,data)
+
+	select {
+	case res := <-data:
+		return res,nil
+	case <- ctx.Done():
+		return nil, status.Errorf(codes.Canceled, "Client cancelled, abandoning.")
+	}
+}
+
+func handle(ctx context.Context, req *pb.DeadlinesRequest, data chan<- *pb.DeadlinesResponse) {
+	select {
+	case <-ctx.Done():
+		log.Println(ctx.Err())
+		runtime.Goexit() //超时后退出该Go协程
+	case <-time.After(4 * time.Second):
+		res := pb.DeadlinesResponse{Code: 200, Value: "hello " + req.Data}
+		data <- &res
+	}
+}

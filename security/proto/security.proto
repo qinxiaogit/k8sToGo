@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "./;proto";
+
+message SecurityRequest{
+    string data =1;
+}
+
+message SecurityResponse{
+    int32 code =1;
+    string value =2;
+}
+
+
+service Security{
+    rpc Route(SecurityRequest) returns (SecurityResponse){};
+}

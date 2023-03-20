@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1 # api 版本
+kind: Ingress # 对象类型
+metadata: # 元数据
+  name: hello-gin-ingress # 对应名称
+spec: # 规约
+  rules: # 规则
+    - http:
+        paths: # 路径
+          - path: /
+            pathType: Prefix
+            backend: # 后端服务
+              service: # 服务
+                name: hello-gin-svc # service 名称
+                port:
+                  number: 8080 # 端口号
+  ingressClassName: nginx

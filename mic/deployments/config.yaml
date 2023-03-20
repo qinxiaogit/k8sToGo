@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blog-config
+data:
+  config.yaml: |-
+    blog:
+      server:
+        name: "blog"
+        host: 'blog-server'
+        grpc:
+          port: ':50050'
+        http:
+          port: ':8050'
+        metrics:
+          port: ':9050'
+    user:
+      db:
+        host: 'user-db'
+        port: ':3306'
+        user: 'root'
+        password: ''
+        name: 'users'
+      server:
+        name: 'user'
+        host: 'user-server'
+        grpc:
+          port: ':50051'
+        http:
+          port: ':8051'
+        metrics:
+          port: ':9051'
+    auth:
+      server:
+        name: 'auth'
+        host: 'auth-server'
+        grpc:
+          port: ':50054'
+        http:
+          port: ':8054'
+        metrics:
+          port: ':9054'
+    jwt:
+      secret: 'secret'
+      expires: 36000
